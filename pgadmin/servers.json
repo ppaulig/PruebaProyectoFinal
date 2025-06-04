@@ -2,7 +2,7 @@
   "Servers": {
     "1": {
       "Name": "PostgreSQL Local",
-      "Group": "Docker Servers", 
+      "Group": "Docker Servers",
       "Host": "database",
       "Port": 5432,
       "MaintenanceDB": "app_database",
@@ -13,7 +13,8 @@
       "Timeout": 10,
       "UseSSHTunnel": 0,
       "TunnelPort": "22",
-      "TunnelAuthentication": 0
+      "TunnelAuthentication": 0,
+      "Save": true
     }
   }
 }

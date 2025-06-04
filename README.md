@@ -34,14 +34,12 @@
 
 ### 1️⃣ Preparación del Entorno
 ```bash
-# Crear estructura de proyecto
-./setup-directories.sh mi-proyecto
+# Clonar el proyecto
+git clone https://github.com/gramoscelli/Proyecto-Final-Prog3.git
 
 # Navegar al proyecto
-cd mi-proyecto
+cd Proyecto-Final-Prog3
 
-# Crear archivos de configuración
-cp .env.example .env
 ```
 
 ### 2️⃣ Configuración de Variables
@@ -281,13 +279,6 @@ docker stats
 
 ## 📈 Escalabilidad y Producción
 
-### Optimizaciones Recomendadas
-- **Multi-stage builds** para imágenes más pequeñas
-- **Health checks** más robustos
-- **Límites de recursos** en contenedores
-- **SSL/TLS** con Let's Encrypt
-- **Load balancing** con múltiples instancias
-
 ### Variables de Entorno de Producción
 ```env
 NODE_ENV=production
@@ -296,33 +287,6 @@ JWT_SECRET=jwt_secret_muy_complejo
 ```
 
 ---
-
-## 📚 Estructura de Archivos Importantes
-
-```
-proyecto/
-├── docker-compose.yml          # Orquestación de servicios
-├── .env                        # Variables de entorno
-├── .gitignore                  # Archivos a ignorar en Git
-│
-├── frontend/
-│   ├── Dockerfile.dev          # Imagen Docker para desarrollo
-│   ├── package.json            # Dependencies de React
-│   └── src/                    # Código fuente React
-│
-├── backend/
-│   ├── Dockerfile.dev          # Imagen Docker para desarrollo
-│   ├── package.json            # Dependencies de Express
-│   ├── server.js               # Servidor principal
-│   ├── models/                 # Modelos de Sequelize
-│   └── routes/                 # Rutas del API
-│
-├── database/
-│   └── init.sql                # Script de inicialización
-│
-└── nginx/
-    └── nginx.conf              # Configuración del proxy
-```
 
 ### Debugging
 ```bash
@@ -369,13 +333,6 @@ JWT_SECRET=jwt_secret_muy_complejo_y_largo
 CORS_ORIGIN=https://tu-dominio.com
 PGADMIN_DEFAULT_PASSWORD=password_admin_seguro
 ```
-
-### Consideraciones de Seguridad
-- **Cambiar contraseñas por defecto** antes de producción
-- **Usar HTTPS** para todas las comunicaciones
-- **Configurar firewall** para limitar acceso a puertos
-- **Actualizar imágenes** regularmente por seguridad
-- **Usar secrets de Docker** para datos sensibles
 
 ---
 
@@ -436,19 +393,6 @@ proyecto/
 
 ## 🎯 Tips y Mejores Prácticas
 
-### Desarrollo Eficiente
-- **Usa hot reload** para ver cambios instantáneamente
-- **Consulta logs** regularmente para detectar errores temprano
-- **Usa pgAdmin** para explorar y modificar datos visualmente
-- **Ejecuta migraciones** cada vez que cambies modelos
-- **Haz backups** antes de cambios importantes en BD
-
-### Gestión de Dependencias
-- **Actualiza package.json** cuando agregues nuevas dependencias
-- **Reconstruye imágenes** después de cambios en dependencies
-- **Usa volúmenes** para node_modules para mejorar rendimiento
-- **Sincroniza versiones** entre desarrollo y producción
-
 ### Resolución de Problemas
 1. **Verifica logs** primero: `docker-compose logs -f`
 2. **Comprueba estado** de contenedores: `docker-compose ps`
@@ -488,4 +432,3 @@ docker system prune -a --volumes
 - **Discord/Slack** de las comunidades
 - **Reddit** r/docker, r/reactjs, r/node
 
-¡Sistema completo y listo para desarrollo! 🚀

@@ -1,2 +1,4 @@
+# Formato: hostname:port:database:username:password
 database:5432:app_database:app_user:app_password
+database:5432:*:app_user:app_password
 *:*:*:app_user:app_password
