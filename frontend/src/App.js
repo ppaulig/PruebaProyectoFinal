@@ -9,7 +9,7 @@ function App() {
         <p>Frontend React funcionando correctamente</p>
         <p>
           <a href="/api/health" target="_blank" rel="noopener noreferrer">
-            Verificar estado del API
+            Verificar estado de la API
           </a>
         </p>
       </header>
