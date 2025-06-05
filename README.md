@@ -34,18 +34,109 @@
 
 ### 1️⃣ Preparación del Entorno
 ```bash
-# Clonar el proyecto
-git clone https://github.com/gramoscelli/Proyecto-Final-Prog3.git
+# Crear estructura de proyecto
+./setup-directories.sh mi-proyecto
 
 # Navegar al proyecto
-cd Proyecto-Final-Prog3
+cd mi-proyecto
 
+# Crear archivos de configuración
+cp .env.example .env
 ```
 
 ### 2️⃣ Configuración de Variables
 ```bash
 # Editar .env con tus valores
 nano .env
+```
+
+Contenido del archivo `.env` para desarrollo (opcional, por si surge algún problema):
+```env
+# ===========================================
+# BASE DE DATOS POSTGRESQL
+# ===========================================
+POSTGRES_DB=app_database
+POSTGRES_USER=app_user
+POSTGRES_PASSWORD=app_password
+
+# ===========================================
+# BACKEND (EXPRESS)
+# ===========================================
+NODE_ENV=development
+PORT=3001
+
+# Configuración de base de datos para Sequelize
+DB_HOST=database
+DB_PORT=5432
+DB_NAME=app_database
+DB_USER=app_user
+DB_PASSWORD=app_password
+
+# JWT para autenticación
+JWT_SECRET=mi_jwt_secret_super_seguro_para_desarrollo_2024
+
+# CORS - Permitir requests desde el frontend
+CORS_ORIGIN=http://localhost:3000
+
+# ===========================================
+# FRONTEND (REACT)
+# ===========================================
+REACT_APP_API_URL=http://localhost:3001/api
+REACT_APP_ENV=development
+
+# Hot reload optimizado para Docker
+CHOKIDAR_USEPOLLING=true
+WATCHPACK_POLLING=true
+FAST_REFRESH=true
+
+# WebSocket para hot reload
+WDS_SOCKET_HOST=localhost
+WDS_SOCKET_PORT=3000
+WDS_SOCKET_PATH=/ws
+
+# ESLint en desarrollo
+ESLINT_NO_DEV_ERRORS=true
+GENERATE_SOURCEMAP=true
+
+# ===========================================
+# REDIS
+# ===========================================
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_URL=redis://redis:6379
+
+# ===========================================
+# PGADMIN 4
+# ===========================================
+PGADMIN_DEFAULT_EMAIL=admin@example.com
+PGADMIN_DEFAULT_PASSWORD=admin123
+PGADMIN_CONFIG_SERVER_MODE=False
+PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
+
+# ===========================================
+# CONFIGURACIÓN DE DESARROLLO
+# ===========================================
+DEBUG=true
+LOG_LEVEL=debug
+UPLOAD_PATH=./uploads
+MAX_FILE_SIZE=10MB
+
+# Email para desarrollo (Mailtrap)
+EMAIL_HOST=smtp.mailtrap.io
+EMAIL_PORT=2525
+EMAIL_USER=tu_usuario_mailtrap
+EMAIL_PASS=tu_password_mailtrap
+EMAIL_FROM=noreply@tuapp.com
+
+# ===========================================
+# SEGURIDAD (DESARROLLO)
+# ===========================================
+RATE_LIMIT_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=900000
+SESSION_SECRET=mi_session_secret_para_desarrollo
+COOKIE_SECURE=false
+COOKIE_HTTP_ONLY=true
+COOKIE_SAME_SITE=lax
 ```
 
 ### 3️⃣ Primera Construcción
@@ -132,6 +223,20 @@ mkdir -p frontend/public frontend/src
 rm -rf database/init.sql
 touch database/init.sql
 # Agregar contenido SQL al archivo
+```
+
+### 🔴 Error de credenciales Docker Desktop
+**Problema:** `error getting credentials - err: exec: "docker-credential-desktop.exe": executable file not found`
+```bash
+# Solución: Reset de configuración Docker
+# Hacer backup de la configuración actual
+cp ~/.docker/config.json ~/.docker/config.json.backup
+
+# Crear configuración limpia
+echo '{}' > ~/.docker/config.json
+
+# Intentar build nuevamente
+docker compose build
 ```
 
 ### 🔴 Puerto ya en uso
@@ -279,6 +384,13 @@ docker stats
 
 ## 📈 Escalabilidad y Producción
 
+### Optimizaciones Recomendadas
+- **Multi-stage builds** para imágenes más pequeñas
+- **Health checks** más robustos
+- **Límites de recursos** en contenedores
+- **SSL/TLS** con Let's Encrypt
+- **Load balancing** con múltiples instancias
+
 ### Variables de Entorno de Producción
 ```env
 NODE_ENV=production
@@ -287,6 +399,33 @@ JWT_SECRET=jwt_secret_muy_complejo
 ```
 
 ---
+
+## 📚 Estructura de Archivos Importantes
+
+```
+proyecto/
+├── docker-compose.yml          # Orquestación de servicios
+├── .env                        # Variables de entorno
+├── .gitignore                  # Archivos a ignorar en Git
+│
+├── frontend/
+│   ├── Dockerfile.dev          # Imagen Docker para desarrollo
+│   ├── package.json            # Dependencies de React
+│   └── src/                    # Código fuente React
+│
+├── backend/
+│   ├── Dockerfile.dev          # Imagen Docker para desarrollo
+│   ├── package.json            # Dependencies de Express
+│   ├── server.js               # Servidor principal
+│   ├── models/                 # Modelos de Sequelize
+│   └── routes/                 # Rutas del API
+│
+├── database/
+│   └── init.sql                # Script de inicialización
+│
+└── nginx/
+    └── nginx.conf              # Configuración del proxy
+```
 
 ### Debugging
 ```bash
@@ -325,14 +464,12 @@ docker-compose logs -f pgadmin
 - **Load balancing** con múltiples instancias del backend
 - **Separación de entornos** (desarrollo, staging, producción)
 
-### Variables de Entorno de Producción
-```env
-NODE_ENV=production
-POSTGRES_PASSWORD=contraseña_super_segura_produccion
-JWT_SECRET=jwt_secret_muy_complejo_y_largo
-CORS_ORIGIN=https://tu-dominio.com
-PGADMIN_DEFAULT_PASSWORD=password_admin_seguro
-```
+### Consideraciones de Seguridad
+- **Cambiar contraseñas por defecto** antes de producción
+- **Usar HTTPS** para todas las comunicaciones
+- **Configurar firewall** para limitar acceso a puertos
+- **Actualizar imágenes** regularmente por seguridad
+- **Usar secrets de Docker** para datos sensibles
 
 ---
 
@@ -393,6 +530,19 @@ proyecto/
 
 ## 🎯 Tips y Mejores Prácticas
 
+### Desarrollo Eficiente
+- **Usa hot reload** para ver cambios instantáneamente
+- **Consulta logs** regularmente para detectar errores temprano
+- **Usa pgAdmin** para explorar y modificar datos visualmente
+- **Ejecuta migraciones** cada vez que cambies modelos
+- **Haz backups** antes de cambios importantes en BD
+
+### Gestión de Dependencias
+- **Actualiza package.json** cuando agregues nuevas dependencias
+- **Reconstruye imágenes** después de cambios en dependencies
+- **Usa volúmenes** para node_modules para mejorar rendimiento
+- **Sincroniza versiones** entre desarrollo y producción
+
 ### Resolución de Problemas
 1. **Verifica logs** primero: `docker-compose logs -f`
 2. **Comprueba estado** de contenedores: `docker-compose ps`
@@ -432,3 +582,4 @@ docker system prune -a --volumes
 - **Discord/Slack** de las comunidades
 - **Reddit** r/docker, r/reactjs, r/node
 
+¡Sistema completo y listo para desarrollo! 🚀

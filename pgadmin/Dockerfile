@@ -1,5 +1,5 @@
 # pgadmin/Dockerfile
-FROM dpage/pgadmin4:latest
+FROM dpage/pgadmin4:8.9
 
 # Crear directorio temporal para nuestros archivos
 USER root
