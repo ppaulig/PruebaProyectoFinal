@@ -110,11 +110,6 @@ Aplicación básica para llevar registro de citas médicas y medicamentos.
 - Registrar síntomas básicos
 - Ver historial médico simple
 
-### Entidades Principales
-- Citas médicas
-- Medicamentos
-- Médicos
-
 ---
 
 ## 🎮 8. Colección de Videojuegos
