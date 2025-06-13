@@ -2,7 +2,7 @@
 
 ---
 
-## 📝 1. Sistema de Gestión de Tareas (NO USAR! será el ejempolo de la cátedra)
+## 📝 1. Sistema de Gestión de Tareas (NO USAR! será el ejempolo de la materia)
 
 ### Descripción
 Una aplicación simple para organizar tareas personales con categorías y usuarios.
