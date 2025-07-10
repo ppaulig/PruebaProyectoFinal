@@ -1,0 +1,14 @@
+TODO:
+
+1. Definir las rutas 
+    - GET, POST Y DELETE para Personalized_Breaths
+    - GET para Images_category
+    - GET para validar el User en login
+
+2. Probar todas las rutas
+
+3. Añadir los componentes que faltan
+
+4. Integrar los componentes con el backend
+
+5. Mejorar el css
