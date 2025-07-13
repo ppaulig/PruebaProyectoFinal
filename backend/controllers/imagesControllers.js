@@ -1,0 +1,1 @@
+// aca van las rutas de lu para traer las imagenes

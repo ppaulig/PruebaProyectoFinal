@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Personalized_breaths',
+      timestamps: false
     }
   );
 
