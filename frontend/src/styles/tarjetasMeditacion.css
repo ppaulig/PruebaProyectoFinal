@@ -1,0 +1,41 @@
+.contenedor-preferencias {
+  width: 100vw;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-fondo);
+  gap: 16px;
+}
+
+.contenedor-preferencias h2 {
+  color: var(--color-texto);
+  font-size: 1.6rem;
+}
+
+.grid-preferencias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card-preferencia {
+  background: var(--color-panel);
+  color: var(--color-texto);
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: var(--sombra-suave);
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-preferencia h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  color: var(--color-primario);
+}

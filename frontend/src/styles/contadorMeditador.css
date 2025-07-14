@@ -1,0 +1,121 @@
+.contador-wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.contador-meditador {
+  width: 100vw;
+  max-width: 100vw;
+  text-align: center;
+  background: var(--color-panel);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: var(--sombra-suave);
+  box-sizing: border-box;
+  margin: 8px;
+}
+
+.breath-circle-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 24px auto;
+  z-index: 2;
+}
+
+.breath-circle-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff10 60%, var(--color-primario) 100%);
+  box-shadow: 0 0 32px 8px #3b697822, 0 0 0 8px #ffffff22;
+  z-index: 1;
+}
+
+.breath-circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primario) 60%, var(--color-secundario) 100%);
+  box-shadow: 0 0 32px 8px #3b697844, 0 0 0 8px #ffffff33;
+  opacity: 0.95;
+  z-index: 2;
+  transform: scale(0.7);
+  will-change: transform;
+}
+
+.breath-circle.inhalar {
+  animation-name: anim-inhalar;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.breath-circle.aguantar {
+  animation-name: anim-aguantar;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.breath-circle.exhalar {
+  animation-name: anim-exhalar;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes anim-inhalar {
+  0% { transform: scale(0.7); }
+  100% { transform: scale(1.2); }
+}
+
+@keyframes anim-aguantar {
+  0%, 100% { transform: scale(1.2); }
+}
+
+@keyframes anim-exhalar {
+  0% { transform: scale(1.2); }
+  100% { transform: scale(0.7); }
+}
+
+.estado {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 20px;
+  text-transform: capitalize;
+}
+
+.counter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--color-primario);
+  margin-top: 12px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--color-secundario);
+}
+
+.ciclo {
+  margin-top: 20px;
+  color: var(--color-primario);
+  font-weight: 500;
+}
